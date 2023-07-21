@@ -51,6 +51,16 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_TIMEZONE = "Turkey"
 CELERY_RESULT_BACKEND = "django-db"
 
+# SMTP SETTINGS
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "minanilaytezer@gmail.com"
+EMAIL_HOST_PASSWORD = "piapvxuomhrvynwy"
+DEFAULT_FROM_EMAIL = "<minanilaytezer@gmail.com>"
+
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
