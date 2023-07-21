@@ -23,15 +23,16 @@ from rest_framework.routers import DefaultRouter
 from first.views import UserViewSet
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("first/", include("first.urls")),
 ]
 
 # This code sets up Django REST Framework's DefaultRouter to create API endpoints
 # for the UserViewSet and then adds those endpoints to the project's URL patterns.
 router = DefaultRouter()
-router.register('user', UserViewSet, basename='user')
+router.register("user", UserViewSet, basename="user")
 
 urlpatterns += router.urls

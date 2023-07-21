@@ -25,6 +25,8 @@ repos:
     hooks:
       - id: flake8
         language_version: python
+        args: [--max-line-length=120]
+        stages: [commit, push]
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.9.0
