@@ -1,6 +1,6 @@
-from .views import RegisterAPI
+from first.api import RegisterApi
 from django.urls import path
 
 urlpatterns = [
-    path("api/register/", RegisterAPI.as_view(), name="register"),
+    path("api/register/", RegisterApi.as_view(), name="register"),
 ]
