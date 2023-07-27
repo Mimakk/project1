@@ -44,13 +44,23 @@ INSTALLED_APPS = [
 
 # CELERY SETTINGS
 CELERY_BROKER_URL = "redis://127.0.0.1:6379"
-CELERY_ACCEPT_CONTENT = {"application/json"}
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TASK_SERIALIZER = "json"
-CELERY_TIMEZONE = "Turkey"
-CELERY_RESULT_BACKEND = "django-db"
+CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
+# BROKER_URL = 'redis://127.0.0.1:6379'
+# CELERY_ACCEPT_CONTENT = {"application/json"}
+# CELERY_RESULT_SERIALIZER = "json"
+# CELERY_TASK_SERIALIZER = "json"
+# CELERY_TIMEZONE = "Europe/Paris"
+# CELERY_RESULT_BACKEND = "django-db"
+# CELERY_BROKER_URL='redis://localhost:6379',
+# CELERY_RESULT_BACKEND='redis://localhost:6379'
+
 
 # SMTP SETTINGS
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
@@ -58,6 +68,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "minanilaytezer@gmail.com"
 EMAIL_HOST_PASSWORD = "piapvxuomhrvynwy"
 DEFAULT_FROM_EMAIL = "<minanilaytezer@gmail.com>"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 
 REST_FRAMEWORK = {
@@ -163,7 +174,3 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# CELERY SETTINGS
-
-CELERY_BLOCKER_URL = "redis://127.0.0.1:6379"
