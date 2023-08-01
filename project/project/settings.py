@@ -96,6 +96,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "project.urls"
 
+SITE_NAME = "LearningStuff"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

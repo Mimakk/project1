@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.models import User
+from djoser.serializers import TokenCreateSerializer
+from djoser.conf import settings
 
 
 # User serializer
@@ -28,3 +30,18 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data["email"],
         )
         return user
+
+
+class CustomTokenCreateSerializer(TokenCreateSerializer):
+    def validate(self, attrs):
+        password = attrs.get("password")
+        parameters = {settings.LOGIN_FIELD: attrs.get(settings.LOGIN_FIELD)}
+        self.user = authenticate(request=self.context.get("request"), **parameters, password=password)
+        if not self.user:
+            self.user = User.objects.filter(**parameters).first()
+            if self.user and not self.user.check_password(password):
+                self.fail("invalid_credentials")
+
+        if self.user:
+            return attrs
+        self.fail("invalid_credentials")
