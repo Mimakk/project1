@@ -81,6 +81,9 @@ REST_FRAMEWORK = {
     ],
 }
 
+# configure Djoser
+DJOSER = {"USER_ID_FIELD": "username", "LOGIN_FIELD": "email"}
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
