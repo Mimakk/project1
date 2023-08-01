@@ -19,8 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-!1jxdhc!vb03cvem$!t9*klh1j)854sd+$cyb^6\
-    )pfty$*&lo1"
+SECRET_KEY = "django-insecure-!1jxdhc!vb03cvem$!t9*klh1j)854sd+$cyb^6)pfty$*&lo1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,19 +44,37 @@ INSTALLED_APPS = [
 
 # CELERY SETTINGS
 CELERY_BROKER_URL = "redis://127.0.0.1:6379"
-CELERY_ACCEPT_CONTENT = {"application/json"}
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TASK_SERIALIZER = "json"
-CELERY_TIMEZONE = "Turkey"
-CELERY_RESULT_BACKEND = "django-db"
+CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
+# BROKER_URL = 'redis://127.0.0.1:6379'
+# CELERY_ACCEPT_CONTENT = {"application/json"}
+# CELERY_RESULT_SERIALIZER = "json"
+# CELERY_TASK_SERIALIZER = "json"
+# CELERY_TIMEZONE = "Europe/Paris"
+# CELERY_RESULT_BACKEND = "django-db"
+# CELERY_BROKER_URL='redis://localhost:6379',
+# CELERY_RESULT_BACKEND='redis://localhost:6379'
+
+
+# SMTP SETTINGS
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "minanilaytezer@gmail.com"
+EMAIL_HOST_PASSWORD = "piapvxuomhrvynwy"
+DEFAULT_FROM_EMAIL = "<minanilaytezer@gmail.com>"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModel\
-                                   PermissionsOrAnonReadOnly"
-    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -122,20 +139,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttribute\
-            SimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLength\
-            Validator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengtValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.Common\
-            PasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.Numeric\
-            PasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -161,7 +174,3 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# CELERY SETTINGS
-
-CELERY_BLOCKER_URL = "redis://127.0.0.1:6379"
