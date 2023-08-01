@@ -49,14 +49,6 @@ CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TASK_SERIALIZER = "json"
 CELERY_STORE_ERRORS_EVEN_IF_IGNORED = True
-# BROKER_URL = 'redis://127.0.0.1:6379'
-# CELERY_ACCEPT_CONTENT = {"application/json"}
-# CELERY_RESULT_SERIALIZER = "json"
-# CELERY_TASK_SERIALIZER = "json"
-# CELERY_TIMEZONE = "Europe/Paris"
-# CELERY_RESULT_BACKEND = "django-db"
-# CELERY_BROKER_URL='redis://localhost:6379',
-# CELERY_RESULT_BACKEND='redis://localhost:6379'
 
 
 # SMTP SETTINGS
@@ -82,7 +74,15 @@ REST_FRAMEWORK = {
 }
 
 # configure Djoser
-DJOSER = {"USER_ID_FIELD": "username", "LOGIN_FIELD": "email"}
+DJOSER = {
+    "USER_ID_FIELD": "username",
+    "LOGIN_FIELD": "email",
+    "SEND_ACTIVATION_EMAIL": True,
+    "ACTIVATION_URL": "activate/{uid}/{token}",
+    "SERIALIZERS": {
+        "token_create": "apps.accounts.serializers.CustomTokenCreateSerializer",
+    },
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
