@@ -1,6 +1,6 @@
 # Project
 
-This Django projects only purpose is learning. Right now I'm trying to add celery to project in order to send email in signup.
+This Django projects only purpose is learning. So far I added an api login and after user loged in I sent a welcome email. Right now my plan to sand not only a welcome mail but authentication mail.
 
 # Installation & Configuration
 
